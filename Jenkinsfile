@@ -89,6 +89,7 @@ pipeline {
       steps {
         container('kubectl') {
           withCredentials([file(credentialsId: 'kube-config', variable: 'TMPKUBECONFIG')]) {
+            sh "cat \$TMPKUBECONFIG"
             sh "cp \$TMPKUBECONFIG /.kube/config"
             sh 'kubectl apply -f deployment.yaml'
           }
@@ -181,9 +182,3 @@ pipeline {
 // aws eks update-kubeconfig --region us-east-1 --name test-cluster
 // certificate-authority-data:
 // LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EWXhPVEU0TURNeE1sb1hEVE16TURZeE5qRTRNRE14TWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ$
-
-
-
-
-
-
